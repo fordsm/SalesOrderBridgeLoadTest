@@ -1,0 +1,21 @@
+group 'com.lifeway.it'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile("org.apache.kafka:kafka_2.11:0.10.2.1") {
+        exclude(module: "slf4j-log4j12")
+    }
+    //ActiveMQ
+    compile 'org.apache.activemq:activemq-core:5.5.1'
+    compile 'org.apache.activemq:activemq-pool:5.5.1'
+    compile 'org.springframework:spring-jms:3.1.0.RELEASE'
+}
