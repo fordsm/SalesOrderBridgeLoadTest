@@ -4,7 +4,7 @@ import org.apache.activemq.ActiveMQConnectionFactory
 import javax.jms.*
 
 def loops = 5000
-def brokerUrl = 'tcp://localhost:61616'
+def brokerUrl = 'tcp://172.16.44.208:61616'
 def queue = 'Q.KAFKA.T.AcknowledgeSalesOrder'
 
 def messageTxt = "<?xml version=\"1.0\" encoding=\"US-ASCII\" standalone='no'?>\n" +
@@ -24,7 +24,7 @@ def messageTxt = "<?xml version=\"1.0\" encoding=\"US-ASCII\" standalone='no'?>\
         "    <Acknowledge>\n" +
         "      <OriginalApplicationArea>\n" +
         "        <Sender>\n" +
-        "          <LogicalID>LifeWay.com</LogicalID>\n" +
+        "          <LogicalID>lifeway</LogicalID>\n" +
         "          <ComponentID>Sales</ComponentID>\n" +
         "          <TaskID/>\n" +
         "          <ReferenceID/>\n" +
@@ -42,7 +42,7 @@ def messageTxt = "<?xml version=\"1.0\" encoding=\"US-ASCII\" standalone='no'?>\
         "          <ID schemeName=\"OracleOrderId\"/>\n" +
         "        </DocumentID>\n" +
         "        <AlternateDocumentID>\n" +
-        "          <ID schemeName=\"WSCOrderId\">10253058</ID>\n" +
+        "          <ID schemeName=\"WSCOrderId\">10253060</ID>\n" +
         "        </AlternateDocumentID>\n" +
         "        <Status>\n" +
         "          <Description>NEW</Description>\n" +
@@ -68,6 +68,7 @@ new ActiveMQConnectionFactory(brokerURL: brokerUrl).createConnection().with {
         }
 
         (1..loops).each {
+//            new URL("http://localhost:8080/prometheus").getContent()
             createProducer().send(createQueue(queue), message)
         }
     }
